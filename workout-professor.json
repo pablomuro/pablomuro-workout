@@ -1,0 +1,140 @@
+[
+  {
+    "workout": "A",
+    "muscule-group": ["shoulder, chest"],
+    "exercises": [
+      {
+        "exercise": "Rotação Externa Ombro",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Elevação Frontal de Ombros com Halteres",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Elevação Frontal de Ombros Supinada na Polia Baixa",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Supino Sentado Aberto Máquina",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Supino Reto com Barra",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Crucifixo Máquina",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Tríceps no Pulley com Corda",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Tríceps Testa Máquina",
+        "series": 3,
+        "reps": 15
+      }
+    ]
+  },
+  {
+    "workout": "B",
+    "muscule-group": ["back", "abs"],
+    "exercises": [
+      {
+        "exercise": "Puxada Articulada Pegada Pronada",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Remada T Aberta",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Remada Cavalo Fechada",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Bíceps Bilateral na Polia Baixa",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Bíceps Halter Martelo",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Encolhimento dos Ombros com Halteres",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Abs Curto no Solo",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Abs Completo no Solo",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Abdominal Infra na Prancha Reta",
+        "series": 3,
+        "reps": 15
+      }
+    ]
+  },
+  {
+    "workout": "C",
+    "muscule-group": ["leg"],
+    "exercises": [
+      {
+        "exercise": "Leg Press Horizontal",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Cadeira Extensora",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Cadeira Abdutora",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Afundo no TRX",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Mesa Flexora",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Panturrilha Burrinho",
+        "series": 3,
+        "reps": 15
+      },
+      {
+        "exercise": "Panturrilha Máquina em Pé",
+        "series": 3,
+        "reps": 15
+      }
+    ]
+  }
+]

@@ -5,7 +5,16 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['active'],
+      ringWidth: ['active'],
+      ringColor: ['active'],
+      ringOpacity: ['active'],
+      ringOffsetWidth: ['active'],
+      ringOffsetColor: ['active'],
+    }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
