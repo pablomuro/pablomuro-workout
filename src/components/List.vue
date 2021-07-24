@@ -38,13 +38,9 @@
 </template>
 
 <script lang="ts">
-interface Exercise {
-  exercise: string
-  series: number
-  reps: number
-  done: boolean
-}
 import { ref, defineComponent, PropType } from 'vue'
+import { Exercise } from '../typings/workout'
+
 export default defineComponent({
   name: 'List',
   emits: ['done'],

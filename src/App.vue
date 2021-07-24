@@ -14,25 +14,7 @@ import { defineComponent, ref } from 'vue'
 import List from './components/List.vue'
 
 import workoutList from '../workout.json'
-
-interface Workout {
-  workout: string
-  'muscule-group': string[]
-  exercises: {
-    exercise: string
-    series: number
-    reps: number
-    done?: boolean
-  }[]
-  header?: string
-}
-
-interface Exercise {
-  exercise: string
-  series: number
-  reps: number
-  done?: boolean
-}
+import { Exercise, Workout } from './typings/workout'
 
 export default defineComponent({
   name: 'App',
