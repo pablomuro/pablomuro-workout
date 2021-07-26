@@ -13,7 +13,7 @@
 import { defineComponent, ref } from 'vue'
 import List from './components/List.vue'
 
-import workoutList from '../workout.json'
+import { workoutList, abdominal } from '../workout.json'
 import { Exercise, Workout } from './typings/workout'
 
 export default defineComponent({
@@ -26,6 +26,11 @@ export default defineComponent({
     workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
 
     const workout = ref<Workout>(workoutList[workoutIndex])
+
+    if (workoutIndex % 2 == 0)
+      workout.value.exercises = (abdominal as any as Exercise[]).concat(
+        workout.value.exercises
+      )
 
     workout.value.header = `Workout ${workout.value.workout} - ${workout.value[
       'muscule-group'
