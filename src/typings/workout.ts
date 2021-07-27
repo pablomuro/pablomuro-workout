@@ -6,8 +6,8 @@ export interface Workout {
 }
 
 export interface Exercise {
-  exercise: string
-  series: number
-  reps: number
-  done?: boolean
+  exercise: string;
+  series: number;
+  reps: number;
+  done: boolean;
 }

@@ -1,6 +1,5 @@
 <template>
   <div
-    @click="markExercise"
     class="flex py-4 m-2 border-2 rounded"
     :class="[
       exercise.done
@@ -24,6 +23,7 @@
           focus:ring-indigo-200
           focus:ring-opacity-50
         "
+        :checked="exercise.done"
       />
     </div>
     <div class="flex flex-col ml-4">
@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { Exercise } from '../typings/workout'
 
 export default defineComponent({
@@ -49,29 +49,6 @@ export default defineComponent({
       type: Object as PropType<Exercise>,
       required: true,
     },
-  },
-  setup: (props, { emit }) => {
-    const exercise = ref<Exercise>(props.exercise)
-    const exerciseCheck = ref<InstanceType<typeof HTMLInputElement>>()
-
-    const markExercise = () => {
-      if (!exercise.value.done) {
-        if (exercise.value.series > 0)
-          exercise.value.series = exercise.value.series - 1
-
-        if (exercise.value.series == 0) {
-          exerciseCheck.value ? (exerciseCheck.value.checked = true) : ''
-          exercise.value.done = true
-          emit('done', exercise.value)
-        }
-      }
-    }
-
-    return {
-      exercise,
-      markExercise,
-      exerciseCheck,
-    }
   },
 })
 </script>
