@@ -43,19 +43,32 @@ export default defineComponent({
   setup: (props, { emit }) => {
     const seriesCount = ref(0)
 
+    const speakMessage = window.SpeechSynthesisUtterance
+      ? new SpeechSynthesisUtterance()
+      : null
     const markExercise = () => {
       let exercise = props.exercise
       if (!exercise.done) {
         if (seriesCount.value < exercise.series) seriesCount.value++
+        speak(seriesCount.value.toString())
 
         if (seriesCount.value == exercise.series) {
           exercise.done = true
+
           const time = setTimeout(() => {
+            speak('done')
             emit('done', exercise)
             seriesCount.value = 0
             clearTimeout(time)
           }, 500)
         }
+      }
+    }
+
+    function speak(text: string) {
+      if (speakMessage) {
+        speakMessage.text = text.toString()
+        speechSynthesis.speak(speakMessage)
       }
     }
 
