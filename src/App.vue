@@ -58,9 +58,10 @@ export default defineComponent({
       workout.value.exercises = (abdominal as any as Exercise[]).concat(
         workout.value.exercises
       )
+      workout.value['muscule-group'].push('Abs')
     }
 
-    workout.value.header = `Workout ${workout.value.workout} - ${workout.value[
+    workout.value.header = `Workout ${workout.value.workout} -> ${workout.value[
       'muscule-group'
     ].join(' - ')}`
 

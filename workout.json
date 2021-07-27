@@ -19,7 +19,7 @@
   "workoutList": [
     {
       "workout": "A",
-      "muscule-group": ["shoulder, chest"],
+      "muscule-group": ["Shoulder", "Chest"],
       "exercises": [
         {
           "exercise": "Rotação Externa Ombro",
@@ -65,50 +65,35 @@
     },
     {
       "workout": "B",
-      "muscule-group": ["back", "abs"],
+      "muscule-group": ["Back"],
       "exercises": [
         {
-          "exercise": "Puxada Articulada Pegada Pronada",
-          "series": 3,
-          "reps": 15
+          "exercise": "Puxada Alta na Polia - Pegada Pronada",
+          "series": 4,
+          "reps": 12
         },
         {
-          "exercise": "Remada T Aberta",
-          "series": 3,
-          "reps": 15
+          "exercise": "Remada Baixa com Triângulo",
+          "series": 4,
+          "reps": 12
         },
         {
-          "exercise": "Remada Cavalo Fechada",
-          "series": 3,
-          "reps": 15
+          "exercise": "Remada Máquina",
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Bíceps Bilateral na Polia Baixa",
-          "series": 3,
-          "reps": 15
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Bíceps Halter Martelo",
-          "series": 3,
-          "reps": 15
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Encolhimento dos Ombros com Halteres",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Abs Curto no Solo",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Abs Completo no Solo",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Abdominal Infra na Prancha Reta",
           "series": 3,
           "reps": 15
         }
@@ -116,32 +101,27 @@
     },
     {
       "workout": "C",
-      "muscule-group": ["leg"],
+      "muscule-group": ["Leg"],
       "exercises": [
         {
-          "exercise": "Leg Press Horizontal",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Cadeira Extensora",
-          "series": 3,
-          "reps": 15
+          "exercise": "Cadeira Adutora",
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Cadeira Abdutora",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Afundo no TRX",
-          "series": 3,
-          "reps": 15
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Mesa Flexora",
-          "series": 3,
-          "reps": 15
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Cadeira Extensora",
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Panturrilha Burrinho",
