@@ -29,8 +29,11 @@
               {{ `${minutes}:${seconds}` }}
             </h1>
             <div
-              class="border rounded px-4 py-2 ml-4"
+              class="border rounded px-6 py-3 ml-5"
               @click.stop.self="addRest"
+              :class="[
+                'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200',
+              ]"
             >
               <h1 class="text-2xl font-bold">+</h1>
             </div>
@@ -59,10 +62,10 @@ export default defineComponent({
     const seriesCount = ref(0)
     const exerciseRestTime = restTime * 1000
 
-    let nextTimeRest = 0
+    let nextTimeRest = exerciseRestTime
     const minutes = ref('00')
     const seconds = ref('00')
-    setTimerDisplay(exerciseRestTime)
+    setTimerDisplay()
 
     let timer: any = null
     let timerRunning = false
@@ -102,7 +105,7 @@ export default defineComponent({
 
     const startRest = () => {
       nextTimeRest =
-        nextTimeRest == 0
+        nextTimeRest == exerciseRestTime
           ? Date.now() + exerciseRestTime
           : Date.now() + nextTimeRest
       timerRunning = true
@@ -126,12 +129,12 @@ export default defineComponent({
 
     function clearTimer() {
       clearInterval(timer)
-      nextTimeRest = 0
+      nextTimeRest = exerciseRestTime
       timerRunning = false
-      setTimerDisplay(exerciseRestTime)
+      setTimerDisplay()
     }
 
-    function setTimerDisplay(time: number) {
+    function setTimerDisplay(time: number = exerciseRestTime) {
       const _minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))
       const _seconds = Math.floor((time % (1000 * 60)) / 1000)
 
