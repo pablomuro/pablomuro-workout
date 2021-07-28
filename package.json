@@ -4,10 +4,10 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "serve": "vite preview --host",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write",
-    "check": "vue-tsc --noEmit"
+    "pwa": "npm run build && npm run serve"
   },
   "dependencies": {
     "vue": "^3.0.5"

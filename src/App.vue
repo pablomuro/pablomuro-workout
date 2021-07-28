@@ -1,4 +1,5 @@
 <template>
+  <ReloadPrompt />
   <div class="flex flex-col border-2 m-4">
     <div class="border-2 p-4 mb-2 text-center">
       <h1 class="text-lg">{{ workout.header }}</h1>
@@ -36,12 +37,14 @@ import List from './components/List.vue'
 import { workoutList, abdominal } from '../workout.json'
 import { Exercise, Workout } from './typings/workout'
 import CurrentWorkout from './components/CurrentWorkout.vue'
+import ReloadPrompt from './components/ReloadPrompt.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
     List,
     CurrentWorkout,
+    ReloadPrompt,
   },
   setup() {
     let workoutIndex = (new Date().getDay() - 1) % workoutList.length
