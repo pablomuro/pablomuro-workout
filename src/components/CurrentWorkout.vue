@@ -87,7 +87,7 @@ export default defineComponent({
           exercise.done = true
 
           const time = setTimeout(() => {
-            speak('done')
+            speak('next exercise')
             emit('done', exercise)
             seriesCount.value = 0
             clearTimeout(time)
@@ -108,17 +108,19 @@ export default defineComponent({
         nextTimeRest == exerciseRestTime
           ? Date.now() + exerciseRestTime
           : Date.now() + nextTimeRest
+
       timerRunning = true
+      const counterStrings = [...[5, 4, 3, 2, 1, 'go']]
+
       timer = setInterval(() => {
         const distance = nextTimeRest - Date.now()
 
-        const seconds = Math.floor(distance / 1000)
-        if (seconds <= 5 && seconds > 0) {
-          speak(seconds.toString())
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+        if (seconds <= 5 && seconds >= 0) {
+          speak(counterStrings.shift()?.toString())
         }
 
         if (distance < 0) {
-          speak('go')
           clearTimer()
           return
         }
@@ -142,8 +144,8 @@ export default defineComponent({
       seconds.value = _seconds < 10 ? `0${_seconds}` : _seconds.toString()
     }
 
-    function speak(text: string) {
-      if (speakMessage) {
+    function speak(text: string | undefined) {
+      if (speakMessage && text) {
         speakMessage.text = text.toString()
         speechSynthesis.speak(speakMessage)
       }
