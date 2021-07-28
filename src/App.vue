@@ -51,18 +51,17 @@ export default defineComponent({
     workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
 
     const workout = ref<Workout>(workoutList[workoutIndex] as Workout)
-    const doneExerciseList = ref<Exercise[]>([])
-    const currentExercise = ref<Exercise>({
-      ...(workout.value.exercises.shift() as Exercise),
-    })
-    currentExercise.value.done = false
-
     if (workoutIndex % 2 == 0) {
       workout.value.exercises = (abdominal as any as Exercise[]).concat(
         workout.value.exercises
       )
       workout.value['muscule-group'].push('Abs')
     }
+    const doneExerciseList = ref<Exercise[]>([])
+    const currentExercise = ref<Exercise>({
+      ...(workout.value.exercises.shift() as Exercise),
+    })
+    currentExercise.value.done = false
 
     workout.value.header = `Workout ${workout.value.workout} -> ${workout.value[
       'muscule-group'
