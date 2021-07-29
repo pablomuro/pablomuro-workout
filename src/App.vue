@@ -47,11 +47,13 @@ export default defineComponent({
     ReloadPrompt,
   },
   setup() {
-    let workoutIndex = (new Date().getDay() - 1) % workoutList.length
+    const dayOfWeek = new Date().getDay() - 1
+    let workoutIndex = dayOfWeek % workoutList.length
     workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
 
     const workout = ref<Workout>(workoutList[workoutIndex] as Workout)
-    if (workoutIndex % 2 == 0) {
+
+    if (dayOfWeek % 2 == 0) {
       workout.value.exercises = (abdominal as any as Exercise[]).concat(
         workout.value.exercises
       )
