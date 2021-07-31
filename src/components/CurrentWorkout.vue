@@ -1,7 +1,7 @@
 <template>
   <transition :duration="{ enter: 500, leave: 800 }">
     <div
-      @click.stop="markExercise"
+      @click="markExercise"
       class="flex flex-col py-6 mx-2 my-6 border-2 rounded h-1/4"
       :class="[
         exercise.done
@@ -30,7 +30,7 @@
             </h1>
             <div
               class="border rounded px-6 py-3 ml-5"
-              @click.stop.self="addRest"
+              @click.self="addRest"
               :class="[
                 'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200',
               ]"
@@ -48,6 +48,7 @@
 import { ref, defineComponent, PropType } from 'vue'
 import { restTime } from '../../workout.json'
 import { Exercise } from '../typings/workout'
+import { SpeechSynthesisUtteranceFactory } from '../utils/SpeechSynthesisUtteranceFactory'
 
 export default defineComponent({
   name: 'CurrentWorkout',
@@ -71,7 +72,7 @@ export default defineComponent({
     let timerRunning = false
 
     const speakMessage = window.SpeechSynthesisUtterance
-      ? new SpeechSynthesisUtterance()
+      ? SpeechSynthesisUtteranceFactory.new()
       : null
 
     const markExercise = () => {
@@ -101,6 +102,8 @@ export default defineComponent({
     const addRest = () => {
       nextTimeRest += exerciseRestTime
       if (!timerRunning) setTimerDisplay(nextTimeRest)
+
+      speak('rest added')
     }
 
     const startRest = () => {
