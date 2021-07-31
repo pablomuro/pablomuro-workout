@@ -99,7 +99,8 @@ export default defineComponent({
       }
     }
 
-    const addRest = () => {
+    const addRest = (event: Event) => {
+      event.stopImmediatePropagation()
       nextTimeRest += exerciseRestTime
       if (!timerRunning) setTimerDisplay(nextTimeRest)
 
