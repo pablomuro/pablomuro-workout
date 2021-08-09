@@ -1,7 +1,7 @@
 <template>
   <transition :duration="{ enter: 500, leave: 800 }">
     <div
-      @click="markExercise"
+      @click.self="markExercise"
       class="flex flex-col py-6 mx-2 my-6 border-2 rounded h-1/4"
       :class="[
         exercise.done
@@ -30,7 +30,7 @@
             </h1>
             <div
               class="border rounded px-6 py-3 ml-5"
-              @click.self="addRest"
+              @click.stop.capture="addRest"
               :class="[
                 'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200',
               ]"
