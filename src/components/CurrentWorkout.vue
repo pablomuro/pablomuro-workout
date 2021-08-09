@@ -1,7 +1,7 @@
 <template>
   <transition :duration="{ enter: 500, leave: 800 }">
     <div
-      @click.self="markExercise"
+      @click="markExercise"
       class="flex flex-col py-6 mx-2 my-6 border-2 rounded h-1/4"
       :class="[
         exercise.done
