@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType } from 'vue'
+import { ref, defineComponent, PropType, watch } from 'vue'
 import { restTime } from '../../workout.json'
 import { Exercise } from '../typings/workout'
 import { SpeechSynthesisUtteranceFactory } from '../utils/SpeechSynthesisUtteranceFactory'
@@ -60,8 +60,11 @@ export default defineComponent({
     },
   },
   setup: (props, { emit }) => {
+    const exercise = props.exercise
     const seriesCount = ref(0)
-    const exerciseRestTime = restTime * 1000
+    let exerciseRestTime = exercise.rest
+      ? exercise.rest * 1000
+      : restTime * 1000
 
     let nextTimeRest = exerciseRestTime
     const minutes = ref('00')
@@ -75,6 +78,15 @@ export default defineComponent({
       ? SpeechSynthesisUtteranceFactory.new()
       : null
 
+    watch(
+      () => props.exercise,
+      (exercise) => {
+        exerciseRestTime = exercise.rest
+          ? exercise.rest * 1000
+          : restTime * 1000
+        setTimerDisplay()
+      }
+    )
     const markExercise = () => {
       let exercise = props.exercise
       if (timerRunning) {

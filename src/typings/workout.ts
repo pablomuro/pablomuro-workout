@@ -10,4 +10,5 @@ export interface Exercise {
   series: number;
   reps: number;
   done: boolean;
+  rest?: number;
 }
