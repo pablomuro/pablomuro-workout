@@ -39,9 +39,8 @@
         },
         {
           "exercise": "Crucifixo Máquina",
-          "series": 10,
-          "reps": 10,
-          "rest": 40
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Supino Reto com Barra",
@@ -71,9 +70,8 @@
       "exercises": [
         {
           "exercise": "Puxada Alta na Polia - Pegada Pronada",
-          "series": 10,
-          "reps": 10,
-          "rest": 40
+          "series": 4,
+          "reps": 12
         },
         {
           "exercise": "Remada Baixa com Triângulo",
@@ -86,13 +84,12 @@
           "reps": 12
         },
         {
-          "exercise": "Bíceps Máquina",
-          "series": 10,
-          "reps": 10,
-          "rest": 40
+          "exercise": "Bíceps Bilateral na Polia Baixa",
+          "series": 4,
+          "reps": 12
         },
         {
-          "exercise": "Bíceps Bilateral na Polia Baixa",
+          "exercise": "Bíceps Halter Martelo",
           "series": 4,
           "reps": 12
         },
