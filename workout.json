@@ -66,6 +66,42 @@
       ]
     },
     {
+      "workout": "C",
+      "muscule-group": ["Leg"],
+      "exercises": [
+        {
+          "exercise": "Cadeira Adutora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Cadeira Abdutora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Mesa Flexora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Cadeira Extensora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Panturrilha Burrinho",
+          "series": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Panturrilha Máquina em Pé",
+          "series": 3,
+          "reps": 15
+        }
+      ]
+    },
+    {
       "workout": "B",
       "muscule-group": ["Back"],
       "exercises": [
@@ -98,42 +134,6 @@
         },
         {
           "exercise": "Encolhimento dos Ombros com Halteres",
-          "series": 3,
-          "reps": 15
-        }
-      ]
-    },
-    {
-      "workout": "C",
-      "muscule-group": ["Leg"],
-      "exercises": [
-        {
-          "exercise": "Cadeira Adutora",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Cadeira Abdutora",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Mesa Flexora",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Cadeira Extensora",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Panturrilha Burrinho",
-          "series": 3,
-          "reps": 15
-        },
-        {
-          "exercise": "Panturrilha Máquina em Pé",
           "series": 3,
           "reps": 15
         }
