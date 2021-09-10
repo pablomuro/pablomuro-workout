@@ -1,43 +1,68 @@
 <template>
   <transition :duration="{ enter: 500, leave: 800 }">
-    <div
-      @click="markExercise"
-      class="flex flex-col py-6 mx-2 my-6 border-2 rounded h-1/4"
-      :class="[
-        exercise.done
-          ? 'bg-green-200'
-          : 'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200',
-      ]"
-    >
-      <div class="flex flex-col text-center mb-3">
-        <h3>
-          {{ exercise.exercise }}
-        </h3>
-        <span>
-          {{ `${exercise.series} x ${exercise.reps}` }}
-        </span>
-      </div>
-      <div class="flex">
-        <div class="flex flex-col self-center text-center w-1/2">
-          <h2 class="mb-3">Done</h2>
-          <h2 class="text-2xl font-bold">{{ seriesCount }}</h2>
+    <div class="border-2 rounded mx-2 py-6 my-6 h-1/4">
+      <div
+        @click="markExercise"
+        class="flex flex-col py-6 my-6 h-1/4"
+        :class="[exercise.done ? 'bg-green-200' : btnActiveClass]"
+      >
+        <div class="flex flex-col text-center mb-3">
+          <h3>
+            {{ exercise.exercise }}
+          </h3>
+          <span>
+            {{ `${exercise.series} x ${exercise.reps}` }}
+          </span>
         </div>
-        <div class="flex flex-col self-center text-center w-1/2">
-          <h2 class="mb-3">Rest</h2>
-          <div class="flex text-center self-center">
-            <h1 class="text-2xl font-bold self-center">
-              {{ `${minutes}:${seconds}` }}
-            </h1>
-            <div
-              class="border rounded px-6 py-3 ml-5"
-              @click.stop.capture="addRest"
-              :class="[
-                'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200',
-              ]"
-            >
-              <h1 class="text-2xl font-bold">+</h1>
+        <div class="flex">
+          <div class="flex flex-col self-center text-center w-1/2">
+            <h2 class="mb-3">Done</h2>
+            <h2 class="text-2xl font-bold">{{ seriesCount }}</h2>
+          </div>
+          <div class="flex flex-col self-center text-center w-1/2">
+            <h2 class="mb-3">Rest</h2>
+            <div class="flex text-center self-center">
+              <h1 class="text-2xl font-bold self-center">
+                {{ `${minutes}:${seconds}` }}
+              </h1>
+              <div class="ml-5">
+                <div
+                  class="border rounded px-6 py-3 mb-1"
+                  @click.stop.capture="manageRest('plus', $event)"
+                  :class="[btnActiveClass]"
+                >
+                  <h1 class="text-2xl font-bold">
+                    <font-awesome-icon :icon="['fas', 'plus']" />
+                  </h1>
+                </div>
+                <div
+                  class="border rounded px-6 py-3 mt-1"
+                  @click.stop.capture="manageRest('minus', $event)"
+                  :class="[btnActiveClass]"
+                >
+                  <h1 class="text-2xl font-bold">
+                    <font-awesome-icon :icon="['fas', 'minus']" />
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="flex justify-around mt-5">
+        <div
+          class="border-2 rounded w-2/4 py-5 mx-1 text-center"
+          @click.stop.capture="manageSeriesCount('undo', $event)"
+          :class="[btnActiveClass]"
+        >
+          <font-awesome-icon :icon="['fas', 'undo-alt']" size="lg" />
+        </div>
+        <div
+          class="border-2 rounded w-2/4 py-5 mx-1 text-center"
+          @click.stop.capture="manageSeriesCount('redo', $event)"
+          :class="[btnActiveClass]"
+        >
+          <font-awesome-icon :icon="['fas', 'redo-alt']" size="lg" />
         </div>
       </div>
     </div>
@@ -49,6 +74,15 @@ import { ref, defineComponent, PropType, watch } from 'vue'
 import { restTime } from '../../workout.json'
 import { Exercise } from '../typings/workout'
 import { SpeechSynthesisUtteranceFactory } from '../utils/SpeechSynthesisUtteranceFactory'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faUndoAlt,
+  faRedoAlt,
+  faPlus,
+  faMinus,
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUndoAlt, faRedoAlt, faPlus, faMinus)
 
 export default defineComponent({
   name: 'CurrentWorkout',
@@ -78,6 +112,8 @@ export default defineComponent({
       ? SpeechSynthesisUtteranceFactory.new()
       : null
 
+    const btnActiveClass =
+      'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200'
     watch(
       () => props.exercise,
       (exercise) => {
@@ -111,12 +147,34 @@ export default defineComponent({
       }
     }
 
-    const addRest = (event: Event) => {
+    const manageRest = (actionType: string, event: Event) => {
       event.stopImmediatePropagation()
-      nextTimeRest += exerciseRestTime
+
+      nextTimeRest +=
+        actionType === 'plus' ? exerciseRestTime : -1 * exerciseRestTime
+
+      nextTimeRest =
+        nextTimeRest < exerciseRestTime ? exerciseRestTime : nextTimeRest
+
       if (!timerRunning) setTimerDisplay(nextTimeRest)
 
-      speak('rest added')
+      if (actionType === 'plus') speak('rest added')
+    }
+
+    const manageSeriesCount = (actionType: string, event: Event) => {
+      event.stopImmediatePropagation()
+
+      let exercise = props.exercise
+      if (!exercise.done) {
+        if (actionType === 'undo' && seriesCount.value > 0) {
+          seriesCount.value--
+        } else if (
+          actionType === 'redo' &&
+          seriesCount.value < exercise.series
+        ) {
+          seriesCount.value++
+        }
+      }
     }
 
     const startRest = () => {
@@ -172,7 +230,9 @@ export default defineComponent({
       markExercise,
       minutes,
       seconds,
-      addRest,
+      manageRest,
+      manageSeriesCount,
+      btnActiveClass,
     }
   },
 })
