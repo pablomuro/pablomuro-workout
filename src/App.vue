@@ -13,14 +13,14 @@
         <font-awesome-icon :icon="['fas', 'arrow-right']" />
       </span>
     </div>
-    <div v-show="currentExercise.exercise">
+    <div v-show="currentExercise?.exercise">
       <h1>Current Exercise</h1>
       <CurrentWorkout :exercise="currentExercise" @done="workoutDone" />
     </div>
     <div v-show="workout.exercises.length">
       <h2>Next Exercise</h2>
       <transition-group name="list" tag="p">
-        <div v-for="exercise in workout.exercises" :key="exercise.exercise">
+        <div v-for="exercise in exerciseList" :key="exercise.exercise">
           <List :exercise="exercise" />
         </div>
       </transition-group>
@@ -67,33 +67,45 @@ export default defineComponent({
 
     const workout = ref<Workout>(workoutList[workoutIndex] as Workout)
 
+    const exerciseList = ref<Exercise[]>([])
+    const doneExerciseList = ref<Exercise[]>([])
+
+    exerciseList.value = [...workout.value.exercises]
+
+    const currentExercise = ref<Exercise>({
+      ...(exerciseList.value.shift() as Exercise),
+    })
+    currentExercise.value.done = false
+
     const nextWorkout = () => {
       workoutIndex =
         workoutIndex == workoutListLength - 1 ? 0 : workoutIndex + 1
       workout.value = workoutList[workoutIndex] as Workout
-      updateWorkoutHeader()
-      updateCurrentExercise()
+      updateExercises()
     }
 
     const previousWorkout = () => {
       workoutIndex =
         workoutIndex == 0 ? workoutListLength - 1 : workoutIndex - 1
       workout.value = workoutList[workoutIndex] as Workout
-      updateWorkoutHeader()
-      updateCurrentExercise()
+      updateExercises()
     }
 
-    if (dayOfWeek % 2 == 0) {
-      workout.value.exercises = (abdominal as any as Exercise[]).concat(
-        workout.value.exercises
-      )
-      workout.value['muscule-group'].push('Abs')
+    const updateExercises = () => {
+      updateWorkoutHeader()
+      exerciseList.value = [...workout.value.exercises]
+      doneExerciseList.value = []
+      if (dayOfWeek % 2 == 0) {
+        exerciseList.value = (abdominal as any as Exercise[]).concat(
+          exerciseList.value
+        )
+        workout.value['muscule-group'].push('Abs')
+      }
+      currentExercise.value = {
+        ...(exerciseList.value.shift() as Exercise),
+      }
+      currentExercise.value.done = false
     }
-    const doneExerciseList = ref<Exercise[]>([])
-    const currentExercise = ref<Exercise>({
-      ...(workout.value.exercises.shift() as Exercise),
-    })
-    currentExercise.value.done = false
 
     const updateWorkoutHeader = () => {
       workout.value.header = `Workout ${
@@ -101,20 +113,13 @@ export default defineComponent({
       } -> ${workout.value['muscule-group'].join(' - ')}`
     }
 
-    const updateCurrentExercise = () => {
-      currentExercise.value = {
-        ...(workout.value.exercises.shift() as Exercise),
-      }
-      currentExercise.value.done = false
-    }
-
-    updateWorkoutHeader()
+    updateExercises()
 
     const workoutDone = (exercise: Exercise): void => {
       const doneExercise = exercise
 
       currentExercise.value = {
-        ...(workout.value.exercises.shift() as Exercise),
+        ...(exerciseList.value.shift() as Exercise),
         done: false,
       }
 
@@ -126,6 +131,7 @@ export default defineComponent({
       nextWorkout,
       previousWorkout,
       currentExercise,
+      exerciseList,
       doneExerciseList,
       workoutDone,
     }
