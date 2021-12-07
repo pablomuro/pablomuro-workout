@@ -1,8 +1,17 @@
 <template>
   <ReloadPrompt />
   <div class="flex flex-col border-2 m-4">
-    <div class="border-2 p-4 mb-2 text-center">
-      <h1 class="text-lg">{{ workout.header }}</h1>
+    <div class="flex justify-between border-2 mb-2 text-center">
+      <span
+        class="text-2xl font-bold p-4"
+        @click.stop.capture="previousWorkout()"
+      >
+        <font-awesome-icon :icon="['fas', 'arrow-left']" />
+      </span>
+      <h1 class="text-lg p-4">{{ workout.header }}</h1>
+      <span class="text-2xl font-bold p-4" @click.stop.capture="nextWorkout()">
+        <font-awesome-icon :icon="['fas', 'arrow-right']" />
+      </span>
     </div>
     <div v-show="currentExercise.exercise">
       <h1>Current Exercise</h1>
@@ -38,6 +47,10 @@ import { workoutList, abdominal } from '../workout.json'
 import { Exercise, Workout } from './typings/workout'
 import CurrentWorkout from './components/CurrentWorkout.vue'
 import ReloadPrompt from './components/ReloadPrompt.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faArrowRight, faArrowLeft)
 
 export default defineComponent({
   name: 'App',
@@ -48,10 +61,27 @@ export default defineComponent({
   },
   setup() {
     const dayOfWeek = new Date().getDay() - 1
-    let workoutIndex = dayOfWeek % workoutList.length
+    const workoutListLength = workoutList.length
+    let workoutIndex = dayOfWeek % workoutListLength
     workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
 
     const workout = ref<Workout>(workoutList[workoutIndex] as Workout)
+
+    const nextWorkout = () => {
+      workoutIndex =
+        workoutIndex == workoutListLength - 1 ? 0 : workoutIndex + 1
+      workout.value = workoutList[workoutIndex] as Workout
+      updateWorkoutHeader()
+      updateCurrentExercise()
+    }
+
+    const previousWorkout = () => {
+      workoutIndex =
+        workoutIndex == 0 ? workoutListLength - 1 : workoutIndex - 1
+      workout.value = workoutList[workoutIndex] as Workout
+      updateWorkoutHeader()
+      updateCurrentExercise()
+    }
 
     if (dayOfWeek % 2 == 0) {
       workout.value.exercises = (abdominal as any as Exercise[]).concat(
@@ -65,9 +95,20 @@ export default defineComponent({
     })
     currentExercise.value.done = false
 
-    workout.value.header = `Workout ${workout.value.workout} -> ${workout.value[
-      'muscule-group'
-    ].join(' - ')}`
+    const updateWorkoutHeader = () => {
+      workout.value.header = `Workout ${
+        workout.value.workout
+      } -> ${workout.value['muscule-group'].join(' - ')}`
+    }
+
+    const updateCurrentExercise = () => {
+      currentExercise.value = {
+        ...(workout.value.exercises.shift() as Exercise),
+      }
+      currentExercise.value.done = false
+    }
+
+    updateWorkoutHeader()
 
     const workoutDone = (exercise: Exercise): void => {
       const doneExercise = exercise
@@ -82,6 +123,8 @@ export default defineComponent({
 
     return {
       workout,
+      nextWorkout,
+      previousWorkout,
       currentExercise,
       doneExerciseList,
       workoutDone,
