@@ -23,21 +23,35 @@
       "muscule-group": ["Shoulder", "Chest"],
       "exercises": [
         {
-          "exercise": "Crucifixo Banco",
-          "series": 4,
-          "reps": 12,
-          "rest": 40
-        },
-        {
-          "exercise": "Supino Inclinado Banco",
-          "series": 4,
-          "reps": 12,
-          "rest": 40
-        },
-        {
-          "exercise": "Pullover",
+          "exercise": "Rotação Externa Ombro",
           "series": 3,
           "reps": 12
+        },
+        {
+          "exercise": "Elevação Frontal de Ombros Pronada na Polia",
+          "series": 3,
+          "reps": 12
+        },
+        {
+          "exercise": "Elevação Frontal de Ombros Supinada na Polia Baixa",
+          "series": 3,
+          "reps": 12
+        },
+        {
+          "exercise": "Crucifixo Máquina",
+          "series": 10,
+          "reps": 10,
+          "rest": 40
+        },
+        {
+          "exercise": "Supino Reto com Barra",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Supino Sentado Aberto Máquina",
+          "series": 4,
+          "reps": 11
         },
         {
           "exercise": "Tríceps no Pulley com Corda",
@@ -48,11 +62,6 @@
           "exercise": "Tríceps Testa Barra Polia",
           "series": 3,
           "reps": 15
-        },
-        {
-          "exercise": "Rotação ombro interna/externa",
-          "series": 3,
-          "reps": 12
         }
       ]
     },
@@ -60,11 +69,6 @@
       "workout": "C",
       "muscule-group": ["Leg"],
       "exercises": [
-        {
-          "exercise": "Alongamento joelho",
-          "series": 3,
-          "reps": 15
-        },
         {
           "exercise": "Cadeira Adutora",
           "series": 4,
@@ -76,7 +80,22 @@
           "reps": 12
         },
         {
+          "exercise": "Mesa Flexora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Cadeira Extensora",
+          "series": 4,
+          "reps": 12
+        },
+        {
           "exercise": "Panturrilha Burrinho",
+          "series": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Panturrilha Máquina em Pé",
           "series": 3,
           "reps": 15
         }
@@ -88,8 +107,8 @@
       "exercises": [
         {
           "exercise": "Puxada Alta na Polia - Pegada Pronada",
-          "series": 4,
-          "reps": 12,
+          "series": 10,
+          "reps": 10,
           "rest": 40
         },
         {
@@ -103,15 +122,15 @@
           "reps": 12
         },
         {
-          "exercise": "Bíceps barra",
-          "series": 4,
-          "reps": 12
+          "exercise": "Bíceps Máquina",
+          "series": 10,
+          "reps": 10,
+          "rest": 40
         },
         {
-          "exercise": "Bíceps Máquina",
+          "exercise": "Bíceps Bilateral na Polia Baixa",
           "series": 4,
-          "reps": 12,
-          "rest": 40
+          "reps": 12
         },
         {
           "exercise": "Encolhimento dos Ombros com Halteres",
