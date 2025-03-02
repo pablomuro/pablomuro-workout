@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex py-4 m-2 border-2 rounded"
+    class="flex py-4 m-2 border-2 rounded-sm"
     :class="[
       exercise.done
         ? 'bg-gray-300'
@@ -16,9 +16,9 @@
           rounded
           border-gray-300
           text-indigo-600
-          shadow-sm
+          shadow-xs
           focus:border-indigo-300
-          focus:ring
+          focus:ring-3
           focus:ring-offset-0
           focus:ring-indigo-200
           focus:ring-opacity-50
@@ -52,5 +52,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style scoped lang="postcss"></style>

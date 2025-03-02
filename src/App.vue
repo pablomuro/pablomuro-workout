@@ -13,8 +13,13 @@
         <font-awesome-icon :icon="['fas', 'arrow-right']" />
       </span>
     </div>
+    <div class="border-2 mx-2 py-2 text-center"
+      @click.stop.capture="() => absRef.isAbsDay  = !absRef.isAbsDay "
+      :class="[absRef.isAbsDay ? 'bg-green-200' : '']"
+    >
+      <h2>{{absRef.text}}</h2>
+    </div>
     <div v-show="currentExercise?.exercise">
-      <h1>Current Exercise</h1>
       <CurrentWorkout :exercise="currentExercise" @done="workoutDone" />
     </div>
     <div v-show="workout.exercises.length">
@@ -40,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import List from './components/List.vue'
 
 import { workoutList, abdominal } from '../workout.json'
@@ -52,6 +57,10 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faArrowRight, faArrowLeft)
 
+const WITH_ABS="with abs series"
+const WITHOUT_ABS="without abs series"
+
+
 export default defineComponent({
   name: 'App',
   components: {
@@ -61,6 +70,23 @@ export default defineComponent({
   },
   setup() {
     const dayOfWeek = new Date().getDay() - 1
+    const isAbsDay = dayOfWeek % 2 == 0 
+
+    const absRef = ref({
+      isAbsDay: isAbsDay,
+      text: isAbsDay ? WITH_ABS : WITHOUT_ABS
+    })
+
+    // const toggleAbs = ref(isAbsDay ? true: false)
+    // const absText = ref(isAbsDay ? WITH_ABS : WITHOUT_ABS)
+
+    watch(absRef.value, () => {
+      absRef.value.text  = absRef.value.isAbsDay ? WITH_ABS : WITHOUT_ABS
+      updateExercises()
+    })
+
+
+    
     const workoutListLength = workoutList.length
     let workoutIndex = dayOfWeek % workoutListLength
     workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
@@ -92,14 +118,20 @@ export default defineComponent({
     }
 
     const updateExercises = () => {
+      console.log('updateExercises')
       updateWorkoutHeader()
       exerciseList.value = [...workout.value.exercises]
       doneExerciseList.value = []
-      if (dayOfWeek % 2 == 0) {
-        exerciseList.value = (abdominal as any as Exercise[]).concat(
-          exerciseList.value
-        )
-        workout.value['muscule-group'].push('Abs')
+      if (absRef.value.isAbsDay == true) {
+        // TODO - add on the beginning of the list
+        // exerciseList.value = (abdominal as Exercise[]).concat(
+        //   exerciseList.value
+        // )
+
+       exerciseList.value  = exerciseList.value.concat(abdominal as Exercise[])
+
+        if(!workout.value['muscule-group'].includes('Abs'))
+          workout.value['muscule-group'].push('Abs')
       }
       currentExercise.value = {
         ...(exerciseList.value.shift() as Exercise),
@@ -134,12 +166,15 @@ export default defineComponent({
       exerciseList,
       doneExerciseList,
       workoutDone,
+      // toggleAbs,
+      // absText
+      absRef
     }
   },
 })
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;

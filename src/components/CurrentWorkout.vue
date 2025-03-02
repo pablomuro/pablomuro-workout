@@ -1,6 +1,6 @@
 <template>
   <transition :duration="{ enter: 500, leave: 800 }">
-    <div class="border-2 rounded mx-2 py-6 my-6 h-1/4">
+    <div class="border-2 rounded-sm mx-2 py-6 my-6 h-1/4">
       <div
         @click="markExercise"
         class="flex flex-col py-6 my-6 h-1/4"
@@ -27,7 +27,7 @@
               </h1>
               <div class="ml-5">
                 <div
-                  class="border rounded px-6 py-3 mb-1"
+                  class="border rounded-sm px-6 py-3 mb-1"
                   @click.stop.capture="manageRest('plus', $event)"
                   :class="[btnActiveClass]"
                 >
@@ -36,7 +36,7 @@
                   </h1>
                 </div>
                 <div
-                  class="border rounded px-6 py-3 mt-1"
+                  class="border rounded-sm px-6 py-3 mt-1"
                   @click.stop.capture="manageRest('minus', $event)"
                   :class="[btnActiveClass]"
                 >
@@ -51,14 +51,14 @@
       </div>
       <div class="flex justify-around mt-5">
         <div
-          class="border-2 rounded w-2/4 py-5 mx-1 text-center"
+          class="border-2 rounded-sm w-2/4 py-5 mx-1 text-center"
           @click.stop.capture="manageSeriesCount('undo', $event)"
           :class="[btnActiveClass]"
         >
           <font-awesome-icon :icon="['fas', 'undo-alt']" size="lg" />
         </div>
         <div
-          class="border-2 rounded w-2/4 py-5 mx-1 text-center"
+          class="border-2 rounded-sm w-2/4 py-5 mx-1 text-center"
           @click.stop.capture="manageSeriesCount('redo', $event)"
           :class="[btnActiveClass]"
         >
@@ -94,13 +94,21 @@ export default defineComponent({
     },
   },
   setup: (props, { emit }) => {
+
+    const ONE_SECOND = 1000
+    const ONE_MINUTE = ONE_SECOND * 60
+
     const exercise = props.exercise
     const seriesCount = ref(0)
+
     let exerciseRestTime = exercise.rest
-      ? exercise.rest * 1000
-      : restTime * 1000
+      ? exercise.rest * ONE_SECOND
+      : restTime * ONE_SECOND
+
 
     let nextTimeRest = exerciseRestTime
+    let dateRestTime = 0
+
     const minutes = ref('00')
     const seconds = ref('00')
     setTimerDisplay()
@@ -113,13 +121,14 @@ export default defineComponent({
       : null
 
     const btnActiveClass =
-      'active:bg-gray-300 active:ring-4 active:ring-offset-0 active:ring-opacity-50 active:ring-indigo-200'
+      'active:bg-gray-300 active:ring-4 active:ring-3-offset-0 active:ring-3-opacity-50 active:ring-3-indigo-200'
+
     watch(
       () => props.exercise,
       (exercise) => {
         exerciseRestTime = exercise.rest
-          ? exercise.rest * 1000
-          : restTime * 1000
+          ? exercise.rest * ONE_SECOND
+          : restTime * ONE_SECOND
         setTimerDisplay()
       }
     )
@@ -178,29 +187,26 @@ export default defineComponent({
     }
 
     const startRest = () => {
-      nextTimeRest =
-        nextTimeRest == exerciseRestTime
-          ? Date.now() + exerciseRestTime
-          : Date.now() + nextTimeRest
+      dateRestTime = nextTimeRest
 
       timerRunning = true
       const counterStrings = [...[5, 4, 3, 2, 1, 'go']]
 
       timer = setInterval(() => {
-        const distance = nextTimeRest - Date.now()
+        const seconds = Math.floor((dateRestTime / (ONE_SECOND)))
 
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000)
         if (seconds <= 5 && seconds >= 0) {
           speak(counterStrings.shift()?.toString())
         }
 
-        if (distance < 0) {
+        if (seconds < 0) {
           clearTimer()
           return
         }
 
-        setTimerDisplay(distance)
-      }, 1000)
+        setTimerDisplay(dateRestTime)
+        dateRestTime -= ONE_SECOND
+      }, ONE_SECOND)
     }
 
     function clearTimer() {
@@ -211,8 +217,8 @@ export default defineComponent({
     }
 
     function setTimerDisplay(time: number = exerciseRestTime) {
-      const _minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))
-      const _seconds = Math.floor((time % (1000 * 60)) / 1000)
+      const _minutes = Math.floor((time % (ONE_MINUTE * 60)) / (ONE_MINUTE))
+      const _seconds = Math.floor((time % (ONE_MINUTE)) / ONE_SECOND)
 
       minutes.value = _minutes < 10 ? `0${_minutes}` : _minutes.toString()
       seconds.value = _seconds < 10 ? `0${_seconds}` : _seconds.toString()
@@ -238,4 +244,3 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="postcss"></style>

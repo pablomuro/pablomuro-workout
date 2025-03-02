@@ -1,0 +1,24 @@
+ - peguntar se quer loading ao carregar a página ou mudar de abdominal
+ - Pensar melhor layout
+ - ver o que da pra salvar de dados no PWA
+ - mudar posição da list
+ - add dados, varios treinos, escolher treinos
+ - salvar peso da maquina e editar rest nas configurações do exercício escolhido
+
+
+
+
+
+
+
+
+ --- capacitor -- native script -- vue
+
+ https://capacitorjs.com/solution/vue
+ https://capacitorjs.com/docs
+
+https://capacitor.nativescript.org/installation.html
+
+
+https://nativescript.org/
+https://docs.nativescript.org/tutorials/build-a-master-detail-app-with-vue
