@@ -77,14 +77,10 @@ export default defineComponent({
       text: isAbsDay ? WITH_ABS : WITHOUT_ABS
     })
 
-    // const toggleAbs = ref(isAbsDay ? true: false)
-    // const absText = ref(isAbsDay ? WITH_ABS : WITHOUT_ABS)
-
     watch(absRef.value, () => {
       absRef.value.text  = absRef.value.isAbsDay ? WITH_ABS : WITHOUT_ABS
       updateExercises()
     })
-
 
     
     const workoutListLength = workoutList.length
@@ -118,7 +114,6 @@ export default defineComponent({
     }
 
     const updateExercises = () => {
-      console.log('updateExercises')
       updateWorkoutHeader()
       exerciseList.value = [...workout.value.exercises]
       doneExerciseList.value = []

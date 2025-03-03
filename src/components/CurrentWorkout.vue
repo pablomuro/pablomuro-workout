@@ -94,7 +94,6 @@ export default defineComponent({
     },
   },
   setup: (props, { emit }) => {
-
     const ONE_SECOND = 1000
     const ONE_MINUTE = ONE_SECOND * 60
 
@@ -105,9 +104,7 @@ export default defineComponent({
       ? exercise.rest * ONE_SECOND
       : restTime * ONE_SECOND
 
-
-    let nextTimeRest = exerciseRestTime
-    let dateRestTime = 0
+    let clockRestTime = exerciseRestTime
 
     const minutes = ref('00')
     const seconds = ref('00')
@@ -129,8 +126,10 @@ export default defineComponent({
         exerciseRestTime = exercise.rest
           ? exercise.rest * ONE_SECOND
           : restTime * ONE_SECOND
+
+        clockRestTime = exerciseRestTime
         setTimerDisplay()
-      }
+      },
     )
     const markExercise = () => {
       let exercise = props.exercise
@@ -159,15 +158,17 @@ export default defineComponent({
     const manageRest = (actionType: string, event: Event) => {
       event.stopImmediatePropagation()
 
-      nextTimeRest +=
-        actionType === 'plus' ? exerciseRestTime : -1 * exerciseRestTime
+      if (actionType === 'minus') {
+        const minusTime = clockRestTime - exerciseRestTime
 
-      nextTimeRest =
-        nextTimeRest < exerciseRestTime ? exerciseRestTime : nextTimeRest
+        clockRestTime =
+          minusTime > exerciseRestTime ? minusTime : exerciseRestTime
+      } else {
+        clockRestTime += exerciseRestTime
+        speak('rest added')
+      }
 
-      if (!timerRunning) setTimerDisplay(nextTimeRest)
-
-      if (actionType === 'plus') speak('rest added')
+      setTimerDisplay(clockRestTime)
     }
 
     const manageSeriesCount = (actionType: string, event: Event) => {
@@ -187,13 +188,11 @@ export default defineComponent({
     }
 
     const startRest = () => {
-      dateRestTime = nextTimeRest
-
       timerRunning = true
       const counterStrings = [...[5, 4, 3, 2, 1, 'go']]
 
       timer = setInterval(() => {
-        const seconds = Math.floor((dateRestTime / (ONE_SECOND)))
+        const seconds = Math.floor(clockRestTime / ONE_SECOND)
 
         if (seconds <= 5 && seconds >= 0) {
           speak(counterStrings.shift()?.toString())
@@ -204,21 +203,21 @@ export default defineComponent({
           return
         }
 
-        setTimerDisplay(dateRestTime)
-        dateRestTime -= ONE_SECOND
+        setTimerDisplay(clockRestTime)
+        clockRestTime -= ONE_SECOND
       }, ONE_SECOND)
     }
 
     function clearTimer() {
       clearInterval(timer)
-      nextTimeRest = exerciseRestTime
+      clockRestTime = exerciseRestTime
       timerRunning = false
       setTimerDisplay()
     }
 
     function setTimerDisplay(time: number = exerciseRestTime) {
-      const _minutes = Math.floor((time % (ONE_MINUTE * 60)) / (ONE_MINUTE))
-      const _seconds = Math.floor((time % (ONE_MINUTE)) / ONE_SECOND)
+      const _minutes = Math.floor((time % (ONE_MINUTE * 60)) / ONE_MINUTE)
+      const _seconds = Math.floor((time % ONE_MINUTE) / ONE_SECOND)
 
       minutes.value = _minutes < 10 ? `0${_minutes}` : _minutes.toString()
       seconds.value = _seconds < 10 ? `0${_seconds}` : _seconds.toString()
@@ -243,4 +242,3 @@ export default defineComponent({
   },
 })
 </script>
-
