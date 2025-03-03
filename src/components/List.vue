@@ -11,18 +11,7 @@
       <input
         type="checkbox"
         ref="exerciseCheck"
-        class="
-          self-center
-          rounded
-          border-gray-300
-          text-indigo-600
-          shadow-xs
-          focus:border-indigo-300
-          focus:ring-3
-          focus:ring-offset-0
-          focus:ring-indigo-200
-          focus:ring-opacity-50
-        "
+        class="self-center rounded border-gray-300 text-indigo-600 shadow-xs focus:border-indigo-300 focus:ring-3 focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
         :checked="exercise.done"
       />
     </div>
@@ -38,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { Exercise } from '../typings/workout'
+import { defineComponent, type PropType } from 'vue'
+import type { Exercise } from '../typings/workout'
 
 export default defineComponent({
   name: 'List',

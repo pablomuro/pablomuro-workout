@@ -70,17 +70,12 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType, watch } from 'vue'
+import { ref, defineComponent, type PropType, watch } from 'vue'
 import { restTime } from '../../workout.json'
-import { Exercise } from '../typings/workout'
+import type { Exercise } from '../typings/workout'
 import { SpeechSynthesisUtteranceFactory } from '../utils/SpeechSynthesisUtteranceFactory'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faUndoAlt,
-  faRedoAlt,
-  faPlus,
-  faMinus,
-} from '@fortawesome/free-solid-svg-icons'
+import { faUndoAlt, faRedoAlt, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUndoAlt, faRedoAlt, faPlus, faMinus)
 
@@ -100,9 +95,7 @@ export default defineComponent({
     const exercise = props.exercise
     const seriesCount = ref(0)
 
-    let exerciseRestTime = exercise.rest
-      ? exercise.rest * ONE_SECOND
-      : restTime * ONE_SECOND
+    let exerciseRestTime = exercise.rest ? exercise.rest * ONE_SECOND : restTime * ONE_SECOND
 
     let clockRestTime = exerciseRestTime
 
@@ -123,9 +116,7 @@ export default defineComponent({
     watch(
       () => props.exercise,
       (exercise) => {
-        exerciseRestTime = exercise.rest
-          ? exercise.rest * ONE_SECOND
-          : restTime * ONE_SECOND
+        exerciseRestTime = exercise.rest ? exercise.rest * ONE_SECOND : restTime * ONE_SECOND
 
         clockRestTime = exerciseRestTime
         setTimerDisplay()
@@ -161,8 +152,7 @@ export default defineComponent({
       if (actionType === 'minus') {
         const minusTime = clockRestTime - exerciseRestTime
 
-        clockRestTime =
-          minusTime > exerciseRestTime ? minusTime : exerciseRestTime
+        clockRestTime = minusTime > exerciseRestTime ? minusTime : exerciseRestTime
       } else {
         clockRestTime += exerciseRestTime
         speak('rest added')
@@ -178,10 +168,7 @@ export default defineComponent({
       if (!exercise.done) {
         if (actionType === 'undo' && seriesCount.value > 0) {
           seriesCount.value--
-        } else if (
-          actionType === 'redo' &&
-          seriesCount.value < exercise.series
-        ) {
+        } else if (actionType === 'redo' && seriesCount.value < exercise.series) {
           seriesCount.value++
         }
       }
