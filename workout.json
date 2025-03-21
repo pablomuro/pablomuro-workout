@@ -19,6 +19,44 @@
   ],
   "workoutList": [
     {
+      "workout": "B",
+      "muscule-group": ["Back"],
+      "exercises": [
+        {
+          "exercise": "Puxada Alta na Polia - Pegada Pronada",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Remada Baixa com Triângulo",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Remada Máquina",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Bíceps barra",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Bíceps Máquina",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Encolhimento dos Ombros com Halteres",
+          "series": 3,
+          "reps": 15
+        }
+      ]
+    },
+    {
       "workout": "A",
       "muscule-group": ["Shoulder", "Chest"],
       "exercises": [
@@ -77,44 +115,6 @@
         },
         {
           "exercise": "Panturrilha Burrinho",
-          "series": 3,
-          "reps": 15
-        }
-      ]
-    },
-    {
-      "workout": "B",
-      "muscule-group": ["Back"],
-      "exercises": [
-        {
-          "exercise": "Puxada Alta na Polia - Pegada Pronada",
-          "series": 4,
-          "reps": 12,
-          "rest": 40
-        },
-        {
-          "exercise": "Remada Baixa com Triângulo",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Remada Máquina",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Bíceps barra",
-          "series": 4,
-          "reps": 12
-        },
-        {
-          "exercise": "Bíceps Máquina",
-          "series": 4,
-          "reps": 12,
-          "rest": 40
-        },
-        {
-          "exercise": "Encolhimento dos Ombros com Halteres",
           "series": 3,
           "reps": 15
         }
