@@ -1,0 +1,124 @@
+{
+  "restTime": 30,
+  "abdominal": [
+    {
+      "exercise": "Extensão Lombar No Banco Inclinado",
+      "series": 3,
+      "reps": 12
+    },
+    {
+      "exercise": "Abdominal Curto",
+      "series": 4,
+      "reps": 12
+    },
+    {
+      "exercise": "Abdominal Infra",
+      "series": 4,
+      "reps": 12
+    }
+  ],
+  "workoutList": [
+    {
+      "workout": "B",
+      "muscule-group": ["Back"],
+      "exercises": [
+        {
+          "exercise": "Puxada Alta na Polia - Pegada Pronada",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Remada Baixa com Triângulo",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Remada Máquina",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Bíceps barra",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Bíceps Máquina",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Encolhimento dos Ombros com Halteres",
+          "series": 3,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "workout": "A",
+      "muscule-group": ["Shoulder", "Chest"],
+      "exercises": [
+        {
+          "exercise": "Crucifixo Banco",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Supino Inclinado Banco",
+          "series": 4,
+          "reps": 12,
+          "rest": 40
+        },
+        {
+          "exercise": "Pullover",
+          "series": 3,
+          "reps": 12
+        },
+        {
+          "exercise": "Tríceps no Pulley com Corda",
+          "series": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Tríceps Testa Barra Polia",
+          "series": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Rotação ombro interna/externa",
+          "series": 3,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "workout": "C",
+      "muscule-group": ["Leg"],
+      "exercises": [
+        {
+          "exercise": "Alongamento joelho",
+          "series": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Cadeira Adutora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Cadeira Abdutora",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Panturrilha Burrinho",
+          "series": 3,
+          "reps": 15
+        }
+      ]
+    }
+  ]
+}
