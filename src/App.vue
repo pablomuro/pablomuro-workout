@@ -118,7 +118,7 @@ export default defineComponent({
       updateWorkoutHeader();
       exerciseList.value = [...workout.value.exercises];
       doneExerciseList.value = [];
-      if (absRef.value.isAbsDay == true && abdominal.length) {
+      if (absRef.value.isAbsDay == true && abdominal && abdominal.length) {
         // TODO - add on the beginning of the list
         // exerciseList.value = (abdominal as Exercise[]).concat(
         //   exerciseList.value

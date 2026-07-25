@@ -15,6 +15,6 @@ export interface Exercise {
 
 export interface JsonWorkoutType {
   restTime: number;
-  abdominal?: Array<Exercise>;
-  workoutList: Exercise[];
+  abdominal?: any[];
+  workoutList: any;
 }
