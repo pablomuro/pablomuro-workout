@@ -2,7 +2,10 @@
   <ReloadPrompt />
   <div class="flex flex-col border-2 m-4">
     <div class="flex justify-between border-2 mb-2 text-center">
-      <span class="text-2xl font-bold p-4" @click.stop.capture="previousWorkout()">
+      <span
+        class="text-2xl font-bold p-4"
+        @click.stop.capture="previousWorkout()"
+      >
         <font-awesome-icon :icon="['fas', 'arrow-left']" />
       </span>
       <h1 class="text-lg p-4">{{ workout.header }}</h1>
@@ -31,7 +34,10 @@
     <div v-show="doneExerciseList.length">
       <h2>Done Exercises</h2>
       <transition-group name="list" tag="p">
-        <div v-for="exerciseDone in doneExerciseList" :key="exerciseDone.exercise + 'Done'">
+        <div
+          v-for="exerciseDone in doneExerciseList"
+          :key="exerciseDone.exercise + 'Done'"
+        >
           <List :exercise="exerciseDone" />
         </div>
       </transition-group>
@@ -40,109 +46,113 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
-import List from './components/List.vue'
+import { defineComponent, ref, watch } from "vue";
+import List from "./components/List.vue";
 
-import { workoutList, abdominal } from '../workout.json'
-import type { Exercise, Workout } from './typings/workout'
-import CurrentWorkout from './components/CurrentWorkout.vue'
-import ReloadPrompt from './components/ReloadPrompt.vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import JsonWorkout from "../workout.json";
+import type { Exercise, Workout, JsonWorkoutType } from "./typings/workout";
+import CurrentWorkout from "./components/CurrentWorkout.vue";
+import ReloadPrompt from "./components/ReloadPrompt.vue";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faArrowRight, faArrowLeft)
+library.add(faArrowRight, faArrowLeft);
 
-const WITH_ABS = 'with abs series'
-const WITHOUT_ABS = 'without abs series'
+const WITH_ABS = "with abs series";
+const WITHOUT_ABS = "without abs series";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     List,
     CurrentWorkout,
     ReloadPrompt,
   },
   setup() {
-    const dayOfWeek = new Date().getDay() - 1
-    const isAbsDay = dayOfWeek % 2 == 0
+    const dayOfWeek = new Date().getDay() - 1;
+    const isAbsDay = dayOfWeek % 2 == 0;
 
     const absRef = ref({
       isAbsDay: isAbsDay,
       text: isAbsDay ? WITH_ABS : WITHOUT_ABS,
-    })
+    });
 
     watch(absRef.value, () => {
-      absRef.value.text = absRef.value.isAbsDay ? WITH_ABS : WITHOUT_ABS
-      updateExercises()
-    })
+      absRef.value.text = absRef.value.isAbsDay ? WITH_ABS : WITHOUT_ABS;
+      updateExercises();
+    });
 
-    const workoutListLength = workoutList.length
-    let workoutIndex = dayOfWeek % workoutListLength
-    workoutIndex = workoutIndex >= 0 ? workoutIndex : 0
+    const { workoutList, abdominal } = JsonWorkout as JsonWorkoutType;
 
-    const workout = ref<Workout>(workoutList[workoutIndex] as Workout)
+    const workoutListLength = workoutList.length;
+    let workoutIndex = dayOfWeek % workoutListLength;
+    workoutIndex = workoutIndex >= 0 ? workoutIndex : 0;
 
-    const exerciseList = ref<Exercise[]>([])
-    const doneExerciseList = ref<Exercise[]>([])
+    const workout = ref<Workout>(workoutList[workoutIndex] as Workout);
 
-    exerciseList.value = [...workout.value.exercises]
+    const exerciseList = ref<Exercise[]>([]);
+    const doneExerciseList = ref<Exercise[]>([]);
+
+    exerciseList.value = [...workout.value.exercises];
 
     const currentExercise = ref<Exercise>({
       ...(exerciseList.value.shift() as Exercise),
-    })
-    currentExercise.value.done = false
+    });
+    currentExercise.value.done = false;
 
     const nextWorkout = () => {
-      workoutIndex = workoutIndex == workoutListLength - 1 ? 0 : workoutIndex + 1
-      workout.value = workoutList[workoutIndex] as Workout
-      updateExercises()
-    }
+      workoutIndex =
+        workoutIndex == workoutListLength - 1 ? 0 : workoutIndex + 1;
+      workout.value = workoutList[workoutIndex] as Workout;
+      updateExercises();
+    };
 
     const previousWorkout = () => {
-      workoutIndex = workoutIndex == 0 ? workoutListLength - 1 : workoutIndex - 1
-      workout.value = workoutList[workoutIndex] as Workout
-      updateExercises()
-    }
+      workoutIndex =
+        workoutIndex == 0 ? workoutListLength - 1 : workoutIndex - 1;
+      workout.value = workoutList[workoutIndex] as Workout;
+      updateExercises();
+    };
 
     const updateExercises = () => {
-      updateWorkoutHeader()
-      exerciseList.value = [...workout.value.exercises]
-      doneExerciseList.value = []
-      if (absRef.value.isAbsDay == true) {
+      updateWorkoutHeader();
+      exerciseList.value = [...workout.value.exercises];
+      doneExerciseList.value = [];
+      if (absRef.value.isAbsDay == true && abdominal.length) {
         // TODO - add on the beginning of the list
         // exerciseList.value = (abdominal as Exercise[]).concat(
         //   exerciseList.value
         // )
 
-        exerciseList.value = exerciseList.value.concat(abdominal as Exercise[])
+        exerciseList.value = exerciseList.value.concat(abdominal as Exercise[]);
 
-        if (!workout.value['muscule-group'].includes('Abs'))
-          workout.value['muscule-group'].push('Abs')
+        if (!workout.value["muscule-group"].includes("Abs"))
+          workout.value["muscule-group"].push("Abs");
       }
       currentExercise.value = {
         ...(exerciseList.value.shift() as Exercise),
-      }
-      currentExercise.value.done = false
-    }
+      };
+      currentExercise.value.done = false;
+    };
 
     const updateWorkoutHeader = () => {
       workout.value.header = `Workout ${
         workout.value.workout
-      } -> ${workout.value['muscule-group'].join(' - ')}`
-    }
+      } -> ${workout.value["muscule-group"].join(" - ")}`;
+    };
 
-    updateExercises()
+    updateExercises();
 
     const workoutDone = (exercise: Exercise): void => {
-      const doneExercise = exercise
+      const doneExercise = exercise;
 
       currentExercise.value = {
         ...(exerciseList.value.shift() as Exercise),
         done: false,
-      }
+      };
 
-      doneExerciseList.value.push(doneExercise)
-    }
+      doneExerciseList.value.push(doneExercise);
+    };
 
     return {
       workout,
@@ -153,9 +163,9 @@ export default defineComponent({
       doneExerciseList,
       workoutDone,
       absRef,
-    }
+    };
   },
-})
+});
 </script>
 
 <style scoped>

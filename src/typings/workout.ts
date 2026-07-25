@@ -12,3 +12,9 @@ export interface Exercise {
   done: boolean;
   rest?: number;
 }
+
+export interface JsonWorkoutType {
+  restTime: number;
+  abdominal?: Array<Exercise>;
+  workoutList: Exercise[];
+}
