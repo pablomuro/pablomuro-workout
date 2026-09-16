@@ -21,7 +21,10 @@
     <div v-show="currentExercise?.exercise">
       <CurrentWorkout :exercise="currentExercise" @done="workoutDone" />
     </div>
-    <div v-if="!currentExercise?.exercise && workout.finisher?.length" class="border-2 mx-2 my-4 p-4">
+    <div
+      v-if="!currentExercise?.exercise && workout.finisher?.length"
+      class="border-2 mx-2 my-4 p-4"
+    >
       <h2 class="font-bold">{{ workout.finisher[0] }}</h2>
       <ul class="list-disc list-inside">
         <li v-for="item in workout.finisher.slice(1)" :key="item">{{ item }}</li>
