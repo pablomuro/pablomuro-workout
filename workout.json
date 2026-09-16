@@ -4,6 +4,12 @@
     {
       "workout": "A",
       "muscule-group": ["Shoulder", "Chest"],
+      "finisher": [
+        "Finisher Cardiorrespiratório A (2 a 3 séries sem descanso):",
+        "Elevação Lateral com Elástico: 15 a 20 repetições",
+        "Flexão de Braço no Chão: Até a falha",
+        "Descanso: 45 segundos."
+      ],
       "exercises": [
         {
           "exercise": "Supino Reto com Barra",
@@ -46,6 +52,11 @@
     {
       "workout": "B",
       "muscule-group": ["Back", "Trapeziu"],
+      "finisher": [
+        "Finisher Cardiorrespiratório B (2 a 3 séries sem descanso):",
+        "Remada Alta com Elástico: 20 repetições rápidas puxando até a linha do peito.",
+        "Descanso: 30 a 45 segundos."
+      ],
       "exercises": [
         {
           "exercise": "Barra Fixa (Pegada Pronada - Pra fora)",
@@ -79,6 +90,11 @@
     {
       "workout": "C",
       "muscule-group": ["Bíceps", "Triceps"],
+      "finisher": [
+        "Finisher Cardiorrespiratório C (2 a 3 séries sem descanso):",
+        "Rosca Direta no Elástico: 15 repetições + Tríceps Extensão no Elástico: 15 repetições.",
+        "Descanso: 45 segundos."
+      ],
       "exercises": [
         {
           "exercise": "1A. Barra Fixa Pegada Supinada (Chin-up)",
@@ -120,6 +136,59 @@
           "exercise": "4B. Tríceps Coice com Elástico",
           "series": 4,
           "reps": 15
+        }
+      ]
+    },
+    {
+      "workout": "D",
+      "muscule-group": ["Legs", "Abs"],
+      "finisher": [
+        "Finisher Cardiorrespiratório D (3 séries sem descanso):",
+        "Prancha Ventral Tradicional: 45 a 60 segundos (Contração máxima de abdômen, glúteos e quadríceps).",
+        "Abdominal Remador Curto (No chão): 45 segundos mantendo os joelhos fixos e levemente flexionados, movimentando apenas o tronco para frente e para trás.",
+        "Descanse 45 segundos e repita."
+      ],
+      "exercises": [
+        {
+          "exercise": "Agachamento Isométrico na Parede (Wall Sit) com elástico",
+          "series": 4,
+          "reps": "60s"
+        },
+        {
+          "exercise": " Elevação Pélvica com Barra ou Halter (No banco)",
+          "series": 4,
+          "reps": 15
+        },
+        {
+          "exercise": "Stiff com Halteres",
+          "series": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Elevação de Panturrilha em Pé",
+          "series": 4,
+          "reps": 20
+        },
+
+        {
+          "exercise": "Elevação de Pernas na Barra Fixa",
+          "series": 3,
+          "reps": 12
+        },
+        {
+          "exercise": "Abdominal Supra no Banco",
+          "series": 3,
+          "reps": "15/20"
+        },
+        {
+          "exercise": "Extensão Lombar no Banco Reto",
+          "series": 3,
+          "reps": "12/15"
+        },
+        {
+          "exercise": "Abdominal Lenhador com Elástico",
+          "series": 3,
+          "reps": 12
         }
       ]
     }
